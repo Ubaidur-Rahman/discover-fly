@@ -83,7 +83,7 @@
                             <p>Charge 10% VAT</p>
                         </div>
                         <div class="right">
-                            <p>$00</p>
+                            <p id="tax-amount">$00</p>
                         </div>
                     </div>
                     <hr>
@@ -92,7 +92,7 @@
                             <h4>Total</h4>
                         </div>
                         <div class="right">
-                            <p>$00</p>
+                            <p id="total-amount">$00</p>
                         </div>
                     </div>
                 </div>
@@ -113,31 +113,25 @@
     <script>
 
 
-        // first class ticket increase event handler
-        const firstClassIncrease = document.getElementById('first-class-increase');
-        firstClassIncrease.addEventListener('click', function () {
-            changeTicketNumber('first-class', true)
+        // first-class ticket increase event handler
+        document.getElementById('first-class-increase').addEventListener('click', function () {
+            changeTicketNumber('first-class', true);
         });
 
-        // first class ticket decrease event handler
-        const firstClassDecrease = document.getElementById('first-class-decrease');
-        firstClassDecrease.addEventListener('click', function () {
-            changeTicketNumber('first-class', false)
+        // first-class ticket decrease event handler
+        document.getElementById('first-class-decrease').addEventListener('click', function () {
+            changeTicketNumber('first-class', false);
         });
 
         // economy ticket increase event handler
-        const economyIncrease = document.getElementById('economy-increase');
-        economyIncrease.addEventListener('click', function () {
-            changeTicketNumber('economy', true)
+        document.getElementById('economy-increase').addEventListener('click', function () {
+            changeTicketNumber('economy', true);
         });
 
         // economy ticket decrease event handler
-        const economyDecrease = document.getElementById('economy-decrease');
-        economyDecrease.addEventListener('click', function () {
-            changeTicketNumber('economy', false)
+        document.getElementById('economy-decrease').addEventListener('click', function () {
+            changeTicketNumber('economy', false);
         });
-
-
 
 
         function changeTicketNumber(seatClass, ticketIncrease) {
@@ -151,17 +145,34 @@
                 seatClassNewInput = seatClassInputTicket - 1;
             }
             seatClassInput.value = seatClassNewInput;
-            // const subTotalAmount = seatClassNewInput * 150;
-            if (seatClass == 'first-class') {
-                subTotalAmount = seatClassNewInput * 150;
-            }
-            if (seatClass == 'economy') {
-                subTotalAmount = seatClassNewInput * 100;
-            }
-
-            document.getElementById('sub-total-amount').innerText = '$' + subTotalAmount;
-
+            calculateTotal();
         }
+
+
+        // All of calculations(subtotal, tax, total)
+        function calculateTotal() {
+            const firstClassInput = getInput('first-class');
+            const economyClassInput = getInput('economy');
+            //subtotal calculation
+            const subTotal = firstClassInput * 150 + economyClassInput * 100;
+            document.getElementById('sub-total-amount').innerText = '$' + subTotal;
+            //tax calculation
+            const taxAmount = subTotal * 0.1;
+            document.getElementById('tax-amount').innerText = '$' + taxAmount;
+            //total calculation
+            const total = subTotal + taxAmount;
+            document.getElementById('total-amount').innerText = '$' + total;
+        }
+
+
+        // to get input 
+        function getInput(seatClass) {
+            const seatClassInput = document.getElementById(seatClass + '-input');
+            const seatClassInputTicket = parseInt(seatClassInput.value);
+            return seatClassInputTicket;
+        }
+
+
 
 
 
