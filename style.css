@@ -44,6 +44,8 @@ nav ul li a:hover, a.active{
     gap: 70px;
     align-items: center;
 }
+
+
 .booking-form{
     background-color: #fff;
     border: 1px solid #ddd;
@@ -119,4 +121,28 @@ nav ul li a:hover, a.active{
 .amount{
     display: flex;
     justify-content: space-between;
+}
+#book-ticket-page{
+    display: none;
+    justify-content: center;
+    text-align: center;
+    margin-top: 100px;
+    background-color: darkgray;
+    box-shadow: 5px 5px 10px rgb(34, 47, 88);
+    width: 40%;
+    border-radius: 10px;
+}
+#book-ticket-page h2{
+    background-color:#0D78F9;
+    display: inline-block;
+    color: white;
+    text-transform: uppercase;
+    font-family: 'Bebas Neue', cursive;
+    font-weight: 400;
+    font-size: 30px;
+    border-radius: 10px;
+    margin-bottom: 50px;
+}
+#book-ticket-page img{
+    max-width: 100%;
 }
