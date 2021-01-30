@@ -107,10 +107,10 @@
         </div>
     </main>
     <section id="book-ticket-page" class="container">
-        <h2>Thank you for your purchase.your purchased total Amount <span id="amount-of-total">0</span>. Pay now for
-            confirm your ticket.
-        </h2>
-        <img src="images/ssl-commerce.1d268dce.png" alt="">
+        <h2>Thank you for buying tickets. Your subtotal amount is <span id="amount-of-subTotal">0</span>. With this, you
+            have to pay 10% VAT which is <span id="amount-of-tax">0</span>. Your total amount is <span
+                id="amount-of-total">0</span>. Pay now to confirm your ticket</h2>
+        <img src="images/ssl-commerce.1d268dce.png" alt="ssl-commerce">
 
     </section>
 
@@ -156,18 +156,20 @@
 
 
         // All of calculations(subtotal, tax, total)
+        let total, taxAmount, subTotal;
         function calculateTotal() {
             const firstClassInput = getInput('first-class');
             const economyClassInput = getInput('economy');
             //subtotal calculation
-            const subTotal = firstClassInput * 150 + economyClassInput * 100;
+            subTotal = firstClassInput * 150 + economyClassInput * 100;
             document.getElementById('sub-total-amount').innerText = '$' + subTotal;
             //tax calculation
-            const taxAmount = subTotal * 0.1;
+            taxAmount = subTotal * 0.1;
             document.getElementById('tax-amount').innerText = '$' + taxAmount;
             //total calculation
-            var total = subTotal + taxAmount;
+            total = subTotal + taxAmount;
             document.getElementById('total-amount').innerText = '$' + total;
+            return total;
         };
 
 
@@ -178,11 +180,14 @@
             return seatClassInputTicket;
         };
 
-        //book now area
+
+        //book now area function
         function bookNow() {
             document.getElementById('main-page').style.display = "none";
             document.getElementById('book-ticket-page').style.display = "block";
-            document.getElementById('amount-of-total').innerText = total;
+            document.getElementById('amount-of-subTotal').innerText = '$' + subTotal;
+            document.getElementById('amount-of-tax').innerText = '$' + taxAmount;
+            document.getElementById('amount-of-total').innerText = '$' + total;
         };
 
     </script>
